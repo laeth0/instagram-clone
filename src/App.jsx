@@ -1,8 +1,7 @@
 import { Fragment } from "react"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Typography } from "@mui/material";
-
+import ResponsiveDrawer from './Component/ResponsiveDrawer/ResponsiveDrawer.jsx';
 
 const darkTheme = createTheme({
   palette: {
@@ -20,7 +19,7 @@ function App() {
     <Fragment>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <Typography variant="h1" sx={{ fontFamily: 'Poppins' }} >laeth raed nueirat</Typography>
+        < ResponsiveDrawer/>
       </ThemeProvider>
     </Fragment>
   )
