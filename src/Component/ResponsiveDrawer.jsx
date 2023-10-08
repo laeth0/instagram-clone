@@ -12,12 +12,12 @@ import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import IconButton from '@mui/material/IconButton';
 import { Routes, Route, BrowserRouter, useNavigate } from 'react-router-dom';
-import Home from '../../Pages/Home';
-import Explore from '../../Pages/Explore';
-import Messages from '../../Pages/Messages';
-import Profile from '../../Pages/Profile';
-import PageNotFound from '../../Pages/PageNotFound';
-import {  Typography } from '@mui/material';
+import Home from '../Pages/Home';
+import Explore from '../Pages/Explore';
+import Messages from '../Pages/Messages';
+import Profile from '../Pages/Profile';
+import PageNotFound from '../Pages/PageNotFound';
+import { Typography } from '@mui/material';
 
 
 
@@ -28,37 +28,38 @@ function ResponsiveDrawer(props) {
 
 
     const { window } = props;
-    
+
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const drawer = (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: "1rem",justifyContent:"center" }}>
-            <img src="instagram_Logo.png" />
+        <Box sx={{ display: 'flex', flexDirection: 'column', mt: "1rem", height:"100%",justifyContent:"space-between" }}>
+            <Box>
+                <img src="instagram_Logo.png" />
 
-            <List>
-                {[{ text: 'Home', icon: <InboxIcon /> }, { text: 'Explore', icon: <MailIcon /> }, { text: 'Messages', icon: <InboxIcon /> }, { text: 'Profile', icon: <MailIcon /> }, { text: 'PageNotFound', icon: <InboxIcon /> }].map((e) => (
-                    <ListItem key={e.text} disablePadding>
-                        <ListItemButton sx={{ display: 'flex', gap: ".7rem" }} >
+                <List>
+                    {[{ text: 'Home', icon: <InboxIcon /> }, { text: 'Explore', icon: <MailIcon /> }, { text: 'Messages', icon: <InboxIcon /> }, { text: 'Profile', icon: <MailIcon /> }, { text: 'PageNotFound', icon: <InboxIcon /> }].map((e) => (
+                        <ListItem key={e.text} disablePadding >
+                            <ListItemButton sx={{ display: 'flex', gap: ".7rem" }} >
 
-                            <ListItemIcon sx={{ minWidth:"fit-content"}}>
-                                {e.icon}
-                            </ListItemIcon>
-                            <ListItemText primary={e.text} />
+                                <ListItemIcon sx={{ minWidth: "fit-content" }}>{e.icon}</ListItemIcon>
+                                <ListItemText primary={drawerWidth === 240 ? e.text : ""} />
 
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-            <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={() => setMobileOpen(!mobileOpen)}
-                sx={{ display: { sm: 'flex' } }}
-
-            >
-                <MenuIcon />
-                <Typography component="span" >Menu</Typography>
-            </IconButton>
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Box>
+            <Box >
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={() => setMobileOpen(!mobileOpen)}
+                    sx={{ display: { sm: 'flex' } , borderRadius:"0"}}
+                >
+                    <MenuIcon />
+                    <Typography component="span" >Menu</Typography>
+                </IconButton>
+            </Box>
         </Box>
     );
 
