@@ -4,13 +4,16 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
-import { Typography, Button } from '@mui/material';
+import { Typography, Button, Grid } from '@mui/material';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const itemData = [
   {
@@ -91,6 +94,17 @@ function CustomTabPanel(props) {
 }
 
 export default function Profile() {
+  const navigate = useNavigate();
+
+  const [AllPosts, setAllPosts] = React.useState([]);
+  let Token = localStorage.getItem("token");
+
+  function fetchAllPosts() {
+    axios.get("http://16.170.173.197/posts", { headers: { Authorization: `Bearer ${Token}` } })
+      .then((res) => setAllPosts(res.data.posts))
+      .catch((err) => console.log(err))
+  }
+
   const Admin = JSON.parse(localStorage.getItem("user"))
   const [value, setValue] = React.useState(0);
 
@@ -98,38 +112,47 @@ export default function Profile() {
     setValue(newValue);
   };
 
+  React.useEffect(() => {
+    if (Admin == null)
+      navigate("/SignIn");
+
+    fetchAllPosts()
+  }, [])
+
   return (
-    <Box sx={{width:"60%",margin:"auto"}}>
-      <Card sx={{ display: 'flex' }}>
+    <Box sx={{ width: { xs: "100%", md: "60%" }, margin: "auto" }}>
+      <Card sx={{ display: 'flex', flexDirection: { xs: "column", md: "row" } }}>
         <CardMedia
           component="img"
-          sx={{ width: 151 }}
-          image="Ellipse.png"
+          sx={{ width: "20%", height: "10%", borderRadius: "50%", margin: "auto" }}
+          image="MyPhoto.jpg"
           alt="Live from space album cover"
         />
 
-        <Box sx={{ display: 'flex',flexDirection:"column",gap:"1rem", width: "calc(100% - 151px)" }}>
+        <Box sx={{ display: 'flex', flexDirection: "column", gap: "1rem", width: "100%" }}>
 
-          <CardContent sx={{ display: "flex", flexDirection: "row",justifyContent:"space-around", width: "100%", height:"fit-content", padding:"0",paddingY:"0px"}}>
-            <Typography component="div" variant="h5" sx={{fontWeight:"900"}}>Laeth </Typography>
+          <CardContent sx={{ display: "flex", justifyContent: "space-between", width: "100%", height: "fit-content", padding: "0", paddingY: "0px", mt: "1rem" }}>
+            <Typography component="div" variant="h5" sx={{ display: "flex", alignItems: "center", fontWeight: "900", fontSize: { xs: ".8rem", sm: "1.5rem", md: "1.2rem" } }}>Laeth </Typography>
 
-            <Button variant="contained" sx={{ background: "white", "&:hover": { background: "white" } }}>Edit Profile</Button>
-            <Button variant="contained" sx={{background:"white","&:hover":{background:"white"}}}>View actions</Button>
+            <Button variant="contained" sx={{ background: "white", fontSize: { xs: ".5rem", md: "1rem" }, p: ".3rem", borderRadius: "12px", "&:hover": { background: "white" } }}>Edit Profile</Button>
+
+            <Button variant="contained" sx={{ background: "white", fontSize: { xs: ".5rem", md: "1rem" }, p: { xs: ".3rem", md: ".5rem" }, borderRadius: "12px", "&:hover": { background: "white" } }}>View actions</Button>
 
             <IconButton>
               <SettingsSuggestIcon />
             </IconButton>
 
           </CardContent>
-          <CardContent sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around", width: "100%", height: "fit-content", padding: "0", paddingY: "0px" }}>
-            <Typography component="div" variant="button" >9 posts </Typography>
-            <Typography component="div" variant="button" >268 followers </Typography>
-            <Typography component="div" variant="button" >296 folowers </Typography>
 
+          <CardContent sx={{ display: "flex", justifyContent: "space-around", width: "100%", height: "fit-content", padding: "0", paddingY: "0px" }}>
+            <Typography component="div" variant="button" textTransform="none" fontSize="1.2rem" >{Admin.posts == null ? Admin.posts : 95} posts </Typography>
+            <Typography component="div" variant="button" textTransform="none" fontSize="1.2rem" >{Admin.followers == null ? 35 : Admin.followers} followers</Typography>
+            <Typography component="div" variant="button" textTransform="none" fontSize="1.2rem" >{Admin.following == null ? 75 : Admin.following} following</Typography>
           </CardContent>
+
           <CardContent>
-            <Typography component="div" variant="button" >ليث  </Typography>
-            <Typography component="div" variant="button" >@aaup_edu  </Typography>
+            <Typography component="div" variant="button" >{Admin.userName}</Typography>
+            <Typography component="div" variant="button" >@aaup_edu</Typography>
             <Typography component="div" variant="button" >I am a guitar player </Typography>
           </CardContent>
 
@@ -137,35 +160,65 @@ export default function Profile() {
 
       </Card>
 
-      <Box sx={{ width: '100%',marginTop:"1rem" }}>
+      <Box sx={{ width: '100%', marginTop: "1rem" }}>
 
-        <Box sx={{ borderTop: 1, borderColor: 'divider',display:"flex",justifyContent:"center" }}>
+        <Box sx={{ borderTop: 1, borderColor: 'divider', display: "flex", justifyContent: "center" }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="POSTS" {...a11yProps(0)}   />
-            <Tab label="REELS" {...a11yProps(1)}  />
-            <Tab label="TAGEG" {...a11yProps(2)}  />
+            <Tab label="POSTS" {...a11yProps(0)} />
+            <Tab label="REELS" {...a11yProps(1)} />
+            <Tab label="TAGEG" {...a11yProps(2)} />
           </Tabs>
         </Box>
 
         <CustomTabPanel value={value} index={0}>
-          <ImageList sx={{ width: "100%", height: "100%", marginInline: "auto" }} cols={3} rowHeight="13rem" >
-            {itemData.map((item) => (
-              <ImageListItem key={item.img}>
-                <img
-                  srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                  src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                  alt={item.title}
+          <Grid container sx={{ width: "65%", height: "100%", marginInline: "auto" }} spacing={2} >
+            {AllPosts.slice(0,10).map((post) => (
+              <Grid item xs={4} key={post.id} >
+                <Box
+                  sx={{ width: "100%", height: "100%" }}
+                  component="img"
+                  src={post.image}
+                  alt={post.description}
                   loading="lazy"
                 />
-              </ImageListItem>
+              </Grid>
             ))}
-          </ImageList>
+          </Grid>
+
         </CustomTabPanel>
+
         <CustomTabPanel value={value} index={1}>
-          Item Two
+          <Grid container sx={{ width: "65%", height: "100%", marginInline: "auto" }} spacing={2} >
+            {AllPosts.slice(10, 20).map((post) => (
+              <Grid item xs={4} key={post.id} >
+                <Box
+                  sx={{ width: "100%", height: "100%" }}
+                  component="img"
+                  src={post.image}
+                  alt={post.description}
+                  loading="lazy"
+                />
+              </Grid>
+            ))}
+          </Grid>
+
         </CustomTabPanel>
+
         <CustomTabPanel value={value} index={2}>
-          Item Three
+          <Grid container sx={{ width: "65%", height: "100%", marginInline: "auto" }} spacing={2} >
+            {AllPosts.slice(20, 30).map((post) => (
+              <Grid item xs={4} key={post.id} >
+                <Box
+                  sx={{ width: "100%", height: "100%" }}
+                  component="img"
+                  src={post.image}
+                  alt={post.description}
+                  loading="lazy"
+                />
+              </Grid>
+            ))}
+          </Grid>
+
         </CustomTabPanel>
       </Box>
 

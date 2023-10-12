@@ -19,7 +19,6 @@ import {useNavigate ,Outlet} from 'react-router-dom';
 
 
 
-
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -89,7 +88,7 @@ export default function App() {
                 </List>
 
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 ,height:"100vh"}}>
+            <Box component="main" sx={{ flexGrow: 1 ,height:"100vh"}}>
                 <Outlet />
             </Box>
         </Box>
