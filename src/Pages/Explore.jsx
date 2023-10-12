@@ -1,73 +1,45 @@
 import * as React from 'react';
-import ImageList from '@mui/material/ImageList';
+import Grid from '@mui/material/Grid';
 import ImageListItem from '@mui/material/ImageListItem';
+import axios from 'axios';
+import Box from '@mui/material/Box';
 
-const itemData = [
-  {
-    img: 'Rectangle 15 (1).png',
-    title: 'Breakfast',
-  },
-  {
-    img: 'Rectangle 15 (2).png',
-    title: 'Burger',
-  },
-  {
-    img: 'Rectangle 15 (3).png',
-    title: 'Camera',
-  },
-  {
-    img: 'Rectangle 15 (4).png',
-    title: 'Coffee',
-  },
-  {
-    img: 'Rectangle 15 (5).png',
-    title: 'Hats',
-  },
-  {
-    img: 'Rectangle 15 (6).png',
-    title: 'Honey',
-  },
-  {
-    img: 'Rectangle 15 (7).png',
-    title: 'Basketball',
-  },
-  {
-    img: 'Rectangle 15 (8).png',
-    title: 'Fern',
-  },
-  {
-    img: 'Rectangle 15 (9).png',
-    title: 'Mushrooms',
-  },
-  {
-    img: 'Rectangle 15 (10).png',
-    title: 'Tomato basil',
-  },
-  {
-    img: 'Rectangle 15.png',
-    title: 'Sea star',
-  },
-  {
-    img: 'Rectangle 20.png',
-    title: 'Bike',
-  },
-];
 
 export default function Explore() {
+
+  const [AllPosts, setAllPosts] = React.useState([]);
+  let Token = localStorage.getItem("token");
+
+
+  function fetchAllPosts() {
+    axios.get("http://16.170.173.197/posts", { headers: { Authorization: `Bearer ${Token}` } })
+      .then(res => {
+        setAllPosts(res.data.posts);
+        console.log(res.data.posts)
+      })
+      .catch(err => console.log(err))
+  }
+
+  React.useEffect(() => {
+    fetchAllPosts()
+  }, [])
+
+
   return (
-    
-    <ImageList sx={{ width: "60%", height: "100%",marginInline:"auto" }} cols={3} rowHeight="13rem" >
-      {itemData.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-            alt={item.title}
+
+    <Grid container sx={{ width: "65%", height: "100%", marginInline: "auto" }} spacing={2} >
+      {AllPosts.map((post) => (
+        <Grid item xs={12} md={6} lg={4} key={post.id} >
+          <Box
+            sx={{width: "100%",height:"100%"}}
+            component="img"
+            src={post.image}
+            alt={post.description}
             loading="lazy"
           />
-        </ImageListItem>
+        </Grid>
       ))}
-    </ImageList>
+    </Grid>
   );
 }
 

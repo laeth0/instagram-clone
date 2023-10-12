@@ -1,0 +1,4 @@
+.swiper-slide{
+    display: flex;
+    flex-direction: column;
+}
