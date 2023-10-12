@@ -13,7 +13,7 @@ import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import ResponsiveDrawerListItem from "../Component/ResponsiveDrawerListItem";
+import ResponsiveDrawerListItem from "./ResponsiveDrawerListItem";
 import {useNavigate ,Outlet} from 'react-router-dom';
 
 
@@ -89,7 +89,7 @@ export default function App() {
                 </List>
 
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Box component="main" sx={{ flexGrow: 1, p: 3 ,height:"100vh"}}>
                 <Outlet />
             </Box>
         </Box>

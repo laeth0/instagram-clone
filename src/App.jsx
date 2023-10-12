@@ -5,9 +5,8 @@ import Explore from './Pages/Explore';
 import Messages from './Pages/Messages';
 import Profile from './Pages/Profile';
 import PageNotFound from './Pages/PageNotFound';
-import SignIn from './Pages/SignIn';
-import SignUp from './Pages/SignUp';
-import MainHome from "./Pages/MainHome"
+import Sign from './Pages/Sign';
+import MainHome from "./Component/MainHome";
 
 
 
@@ -25,8 +24,7 @@ export default function App() {
           <Route path='/Profile' element={<Profile />} />
           <Route path='/Messages' element={<Messages />} />
         </Route>
-        <Route path='/SignIn' element={<SignIn />} />
-        <Route path='/SignUp' element={<SignUp />} />
+        <Route path='/Sign' element={<Sign />} />
         <Route path='*' element={<PageNotFound />} /> 
       </Routes>
     </BrowserRouter>

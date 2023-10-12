@@ -8,12 +8,15 @@ import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Home() {
     const [AllUsers, setAllUsers] = React.useState([]);
     const [AllPosts, setAllPosts] = React.useState([]);
     const Admin = JSON.parse(localStorage.getItem("user"))
     let Token = localStorage.getItem("token");
+    const navigate = useNavigate();
 
     function fetchAllUsers() {
         axios.get("http://16.170.173.197/users")
@@ -28,6 +31,9 @@ export default function Home() {
     }
 
     useEffect(() => {
+        if(Admin == null)
+            navigate("/SignIn");
+
         fetchAllUsers()
         fetchAllPosts()
     }, [])
@@ -56,7 +62,7 @@ export default function Home() {
                     <Box sx={{ display: "flex", flexDirection: "column", gap: "2rem", mt: "2rem" }}>
 
                         {AllPosts.map(post => (
-                            <Card sx={{ maxWidth: "100%" }}>
+                            <Card sx={{ maxWidth: "100%" }} key={post.id}>
                                 <CardHeader
                                     avatar={<Box src='Ellipse.png' component="img" alt='image' />}
                                     action={
@@ -102,8 +108,8 @@ export default function Home() {
 
 
                                 <CardContent sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                                    <Typography variant="span">{post.likes.length} Likes</Typography>
-                                    <Typography variant="p" color="text.secondary">{post.description}</Typography>
+                                    <Typography component="span" variant="subtitle1">{post.likes.length} Likes</Typography>
+                                    <Typography component="p" variant="subtitle1" color="text.secondary">{post.description}</Typography>
                                 </CardContent>
 
                             </Card>
@@ -136,24 +142,19 @@ export default function Home() {
                     </Card>
 
                     <Box sx={{ display: "flex", justifyContent: "space-between", width: "65%" }}>
-                        <Typography component="p">
-                            Suggestions For You
-                        </Typography>
-
-                        <Typography component="span">
-                            See More
-                        </Typography>
+                        <Typography component="p">Suggestions For You</Typography>
+                        <Typography component="span">See More</Typography>
                     </Box>
 
                     {AllUsers.slice(0, 8).map(user => (
-                        <Card sx={{ display: 'flex', background: "none", width: "65%", alignItems: "center", height: "4rem" }}>
+                        <Card key={user.id} sx={{ display: 'flex', background: "none", width: "65%", alignItems: "center", height: "4rem" }}>
 
                             <Box sx={{ width: "20%" }}>
                                 <CardMedia component="img" sx={{ objectFit: "scale-down" }} image="Ellipse.png" alt="Live from space album cover" />
                             </Box>
 
                             <CardContent sx={{ flex: '1 0 auto', flexDirection: "column", justifyContent: "center", alignItems: "center", py: "0" }}>
-                                <Typography component="div" variant="p">
+                                <Typography component="div" variant="subtitle1">
                                     {user.userName}
                                 </Typography>
                                 <Typography variant="subtitle2" color="text.secondary" component="div">
