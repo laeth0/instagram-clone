@@ -4,7 +4,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
-export default function ResponsiveDrawerListItem({open,Text,Icon,onClick}) {
+export default function ResponsiveDrawerListItem({open,Text,Icon,onClick=()=>{}}) {
     return (
         <React.Fragment>
             <ListItem disablePadding sx={{ display: 'block' }} onClick={onClick}>

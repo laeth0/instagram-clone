@@ -14,7 +14,10 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ResponsiveDrawerListItem from "./ResponsiveDrawerListItem";
-import {useNavigate ,Outlet} from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
 
 
 
@@ -59,18 +62,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function App() {
+export default function MainHome({ theme, setTheme }) {
     const navigate = useNavigate();
-
 
     const [open, setOpen] = React.useState(false);
     const Admin = JSON.parse(localStorage.getItem("user"))
 
-
-    React.useEffect(()=>{
-        if(Admin==null)
-            navigate("/Sign")
-    },[])
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -79,21 +76,22 @@ export default function App() {
                 <List sx={{ height: "100%", display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
                     <Box>
                         <ResponsiveDrawerListItem Text="Home" Icon={<HomeIcon />} onClick={() => navigate("/")} open={open} />
-                        <ResponsiveDrawerListItem Text="Search" Icon={<SearchIcon />} onClick={() => navigate("/Search")} open={open} />
+                        <ResponsiveDrawerListItem Text="Search" Icon={<SearchIcon />} open={open} />
                         <ResponsiveDrawerListItem Text="Explore" Icon={<ExploreOutlinedIcon />} onClick={() => navigate("/Explore")} open={open} />
-                        <ResponsiveDrawerListItem Text="Reels" Icon={<MovieFilterIcon />} onClick={() => navigate("/Reels")} open={open} />
+                        <ResponsiveDrawerListItem Text="Reels" Icon={<MovieFilterIcon />} open={open} />
                         <ResponsiveDrawerListItem Text="Messages" Icon={<WhatsAppIcon />} onClick={() => navigate("/Messages")} open={open} />
-                        <ResponsiveDrawerListItem Text="Notifications" Icon={<FavoriteBorderIcon />} onClick={() => navigate("/Notifications")} open={open} />
-                        <ResponsiveDrawerListItem Text="Create" Icon={<AddCircleOutlineIcon />} onClick={() => navigate("/Create")} open={open} />
-                        <ResponsiveDrawerListItem Text={Admin.userName} Icon={<Box component="img" src="MyPhoto.jpg" sx={{ aspectRatio: "1/1", borderRadius: "50%", width: "1.5rem" }} alt='user image' />} onClick={() => navigate(`/Profile/${Admin.userName}`)} open={open} />
+                        <ResponsiveDrawerListItem Text="Notifications" Icon={<FavoriteBorderIcon />} open={open} />
+                        <ResponsiveDrawerListItem Text="Create" Icon={<AddCircleOutlineIcon />} open={open} />
+                        <ResponsiveDrawerListItem Text={Admin.userName} Icon={<Box component="img" src={Admin.avatar} sx={{ aspectRatio: "1/1", borderRadius: "50%", width: "1.5rem" }} alt='user image' />} onClick={() => navigate(`/Profile/${Admin.userName}`)} open={open} />
                     </Box>
                     <Box>
+                        <ResponsiveDrawerListItem Text={theme} Icon={<IconButton sx={{ p: 0 }} color="inherit" aria-label="open drawer" >{theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}</IconButton>} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} open={open} />
                         <ResponsiveDrawerListItem Text="Menu" Icon={<IconButton sx={{ p: 0 }} color="inherit" aria-label="open drawer" ><MenuIcon /></IconButton>} onClick={() => setOpen(!open)} open={open} />
                     </Box>
                 </List>
 
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1 ,height:"100vh"}}>
+            <Box component="main" sx={{ flexGrow: 1, height: "100vh" }}>
                 <Outlet />
             </Box>
         </Box>

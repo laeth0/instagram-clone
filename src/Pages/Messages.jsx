@@ -12,10 +12,11 @@ import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
+import Skeleton from '@mui/material/Skeleton';
 
 
 
-export default function Messages() {
+export default function Messages({ theme }) {
     const [openChat, setOpenChat] = React.useState(false)
     const [openMessage, setOpenMessage] = React.useState(false)
     const [AllUsers, setAllUsers] = React.useState([]);
@@ -65,16 +66,73 @@ export default function Messages() {
 
                 <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem", marginY: "1rem" }}>
 
-                    {AllUsers.map(user =>
+                    {AllUsers.length===0?
+                        (<>
+                            <Box  sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                                <Skeleton variant="circular" width="3rem" height="3rem" />
+                                <Box sx={{ display: "flex", gap:".5rem",flexDirection:"column"}}>
+                                    <Skeleton variant="rectangular" width="3rem" height=".7rem" />
+                                    <Skeleton variant="rectangular" width="4rem" height=".5rem" />
+                                </Box>
+                            </Box>
+                            <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                                <Skeleton variant="circular" width="3rem" height="3rem" />
+                                <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column" }}>
+                                    <Skeleton variant="rectangular" width="3rem" height=".7rem" />
+                                    <Skeleton variant="rectangular" width="4rem" height=".5rem" />
+                                </Box>
+                            </Box>
+                            <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                                <Skeleton variant="circular" width="3rem" height="3rem" />
+                                <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column" }}>
+                                    <Skeleton variant="rectangular" width="3rem" height=".7rem" />
+                                    <Skeleton variant="rectangular" width="4rem" height=".5rem" />
+                                </Box>
+                            </Box>
+                            <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                                <Skeleton variant="circular" width="3rem" height="3rem" />
+                                <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column" }}>
+                                    <Skeleton variant="rectangular" width="3rem" height=".7rem" />
+                                    <Skeleton variant="rectangular" width="4rem" height=".5rem" />
+                                </Box>
+                            </Box>
+                            <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                                <Skeleton variant="circular" width="3rem" height="3rem" />
+                                <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column" }}>
+                                    <Skeleton variant="rectangular" width="3rem" height=".7rem" />
+                                    <Skeleton variant="rectangular" width="4rem" height=".5rem" />
+                                </Box>
+                            </Box>
+                            <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                                <Skeleton variant="circular" width="3rem" height="3rem" />
+                                <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column" }}>
+                                    <Skeleton variant="rectangular" width="3rem" height=".7rem" />
+                                    <Skeleton variant="rectangular" width="4rem" height=".5rem" />
+                                </Box>
+                            </Box>
+                            <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                                <Skeleton variant="circular" width="3rem" height="3rem" />
+                                <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column" }}>
+                                    <Skeleton variant="rectangular" width="3rem" height=".7rem" />
+                                    <Skeleton variant="rectangular" width="4rem" height=".5rem" />
+                                </Box>
+                            </Box>
+                            <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                                <Skeleton variant="circular" width="3rem" height="3rem" />
+                                <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column" }}>
+                                    <Skeleton variant="rectangular" width="3rem" height=".7rem" />
+                                    <Skeleton variant="rectangular" width="4rem" height=".5rem" />
+                                </Box>
+                            </Box>
+                            
+                        </>)
+                    :AllUsers.map(user =>
                         <Box key={user.id} onClick={() => { setOpenChat(true); setPersonChart(user) }} sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
-
-                            <Box component="img" src='MyPhoto.jpg' alt='MyPhoto' sx={{ width: "25%", borderRadius: "50%", aspectRatio: "1/1" }} />
-
+                            <Box component="img" src={user.avatar} alt='MyPhoto' sx={{ width: "25%", borderRadius: "50%", aspectRatio: "1/1" }} />
                             <Box>
                                 <Typography sx={{ fontSize: "1rem" }}>{user.userName}</Typography>
                                 <Typography sx={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: 'ellipsis', width: '100%', fontSize: ".7rem" }}>Lorem ipsum dolor  </Typography>
                             </Box>
-
                         </Box>
                     )}
                 </Box>
@@ -83,15 +141,9 @@ export default function Messages() {
 
             <Grid item xs={12} sm={9} md={10} sx={{ display: { xs: openMessage ? "none" : "block", sm: "block" } }}>
 
-
-
-
-
-
-
                 <Box sx={{ display: openChat == false ? "flex" : "none", flexDirection: "column",height:"100%", justifyContent: "center", alignItems: "center", gap: "1rem", textAlign: "center" }}>
-                    <Box component="img" src='messengar.png' alt='messengar.png' />
-                    <Typography variant='h3'> Your messenger </Typography>
+                    <Box component="img" src={theme === "dark" ? 'messengar.png' :"messenger_light.png"} alt='messengar.png' />
+                    <Typography variant='h3'> Your messages </Typography>
                     <Typography component="p" variant="h6"> Send private photos and messages to a friend or group </Typography>
                     <Button variant="contained" onClick={() => setOpenMessage(!openMessage)} >SEND MESSAGE</Button>
                 </Box>

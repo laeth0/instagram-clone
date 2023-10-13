@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Typography, Grid, Box, Container, Link, TextField, CssBaseline, Button } from '@mui/material';
+import { Typography, Grid, Box, Container, TextField, CssBaseline, Button } from '@mui/material';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-export default function Sign() {
+export default function Sign({ theme }) {
   const navigate = useNavigate();
   const [UserEmail, setUserEmail] = React.useState("");
   const [UserName, setUserName] = React.useState("");
@@ -62,11 +62,10 @@ export default function Sign() {
             {/* Front SignIn */}
             <Box sx={{ position: "absolute", inset: "0", backfaceVisibility: "hidden", my: 12, mx: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: "1rem" }} >
 
-              <Box component="img" src='instagram_Logo.png' alt='instagram_Logo.png' />
+              <Box sx={{ width: "9.3rem", height: "2.3rem" }} component="img" src={theme == "light" ?"instagram-light-mode.png":'instagram_Logo.png'} alt='instagram_Logo.png' />
 
               <Box component="form" noValidate onSubmit={e => e.preventDefault()} sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 
-                {/* <TextField required fullWidth sx={{ borderRadius: "5px" }} id="Email" label="Email" name="Email" autoComplete="Email" autoFocus /> */}
                 <TextField onChange={(e) => setUserEmail(e.target.value)} fullWidth sx={{ borderRadius: "5px" }} id="Username" label="Mobile Number or Email" name="Username" autoComplete="Username" autoFocus />
                 <TextField onChange={(e) => setPassword(e.target.value)} fullWidth sx={{ borderRadius: "5px" }} name="password" label="Password" type="password" id="password" autoComplete="current-password" />
 
@@ -84,9 +83,9 @@ export default function Sign() {
             </Box>
 
             {/* Back SignUp */}
-            <Box sx={{ position: "absolute", inset: "0", backfaceVisibility: "hidden", transform: "rotateY(180deg)", my: { xs: 4, sm: 8 }, mx: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: "1rem" }} >
+            <Box sx={{ position: "absolute", inset: "0", backfaceVisibility: "hidden", transform: "rotateY(180deg)", my: { xs: 4, sm: 8 }, mx: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: ".8rem" }} >
 
-              <Box component="img" src='instagram_Logo.png' alt='instagram_Logo.png' />
+              <Box sx={{width:"9.3rem",height:"2.3rem"}} component="img" src={theme == "light" ? "instagram-light-mode.png" : 'instagram_Logo.png'} alt='instagram_Logo.png' />
 
               <Typography component="p" variant="subtitle1" textAlign="center">Sign up to see photos and videos from your friends</Typography>
 

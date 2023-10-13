@@ -2,7 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import { Typography, Button, Grid } from '@mui/material';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
@@ -10,6 +9,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Skeleton from '@mui/material/Skeleton';
 
 
 function a11yProps(index) {
@@ -70,10 +70,10 @@ export default function Profile() {
   return (
     <Box sx={{ width: { xs: "100%", md: "60%" }, margin: "auto" }}>
       <Card sx={{ display: 'flex', flexDirection: { xs: "column", md: "row" } }}>
-        <CardMedia
+        <Box
           component="img"
-          sx={{ width: "20%", height: "10%", borderRadius: "50%", margin: "auto" }}
-          image="MyPhoto.jpg"
+          sx={{ width: "10rem", borderRadius: "50%", margin: "auto",aspectRatio:"1/1" }}
+          src={Admin.avatar}
           alt="MyPhoto.jpg"
         />
 
@@ -82,9 +82,9 @@ export default function Profile() {
           <CardContent sx={{ display: "flex", justifyContent: "space-between", width: "100%", height: "fit-content", padding: "0", paddingY: "0px", mt: "1rem" }}>
             <Typography component="div" variant="h5" sx={{ display: "flex", alignItems: "center", fontWeight: "900", fontSize: { xs: ".8rem", sm: "1.5rem", md: "1.2rem" } }}>{Admin.userName} </Typography>
 
-            <Button variant="contained" sx={{ background: "white", fontSize: { xs: ".5rem", md: "1rem" }, p: ".3rem", borderRadius: "12px", "&:hover": { background: "white" } }}>Edit Profile</Button>
+            <Button variant="contained" sx={{fontSize: { xs: ".5rem", md: "1rem" }, p: ".3rem", borderRadius: "12px"}}>Edit Profile</Button>
 
-            <Button variant="contained" sx={{ background: "white", fontSize: { xs: ".5rem", md: "1rem" }, p: { xs: ".3rem", md: ".5rem" }, borderRadius: "12px", "&:hover": { background: "white" } }}>View actions</Button>
+            <Button variant="contained" sx={{fontSize: { xs: ".5rem", md: "1rem" }, p: { xs: ".3rem", md: ".5rem" }, borderRadius: "12px"}}>View actions</Button>
 
             <IconButton>
               <SettingsSuggestIcon />
@@ -92,7 +92,7 @@ export default function Profile() {
 
           </CardContent>
 
-          <CardContent sx={{ display: "flex", justifyContent: "space-around", width: "100%", height: "fit-content", padding: "0", paddingY: "0px" }}>
+          <CardContent sx={{display: "flex", justifyContent: "space-around", width: "100%", height: "fit-content", padding: "0", paddingY: "0px" }}>
             <Typography component="div" variant="button" textTransform="none" fontSize="1.2rem" >{Admin.posts == null ? Admin.posts : 95} posts </Typography>
             <Typography component="div" variant="button" textTransform="none" fontSize="1.2rem" >{Admin.followers == null ? 35 : Admin.followers} followers</Typography>
             <Typography component="div" variant="button" textTransform="none" fontSize="1.2rem" >{Admin.following == null ? 75 : Admin.following} following</Typography>
