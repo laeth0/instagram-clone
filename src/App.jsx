@@ -21,7 +21,7 @@ export default function App() {
         <Route path='/' element={<MainHome />} >
           <Route index element={<Home />} />
           <Route path='/Explore' element={<Explore />} />
-          <Route path='/Profile' element={<Profile />} />
+          <Route path='/Profile/:username' element={<Profile />} />
           <Route path='/Messages' element={<Messages />} />
         </Route>
         <Route path='/Sign' element={<Sign />} />

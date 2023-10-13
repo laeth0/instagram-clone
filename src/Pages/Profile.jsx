@@ -6,65 +6,11 @@ import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import { Typography, Button, Grid } from '@mui/material';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
-import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
-const itemData = [
-  {
-    img: 'Rectangle 15 (1).png',
-    title: 'Breakfast',
-  },
-  {
-    img: 'Rectangle 15 (2).png',
-    title: 'Burger',
-  },
-  {
-    img: 'Rectangle 15 (3).png',
-    title: 'Camera',
-  },
-  {
-    img: 'Rectangle 15 (4).png',
-    title: 'Coffee',
-  },
-  {
-    img: 'Rectangle 15 (5).png',
-    title: 'Hats',
-  },
-  {
-    img: 'Rectangle 15 (6).png',
-    title: 'Honey',
-  },
-  {
-    img: 'Rectangle 15 (7).png',
-    title: 'Basketball',
-  },
-  {
-    img: 'Rectangle 15 (8).png',
-    title: 'Fern',
-  },
-  {
-    img: 'Rectangle 15 (9).png',
-    title: 'Mushrooms',
-  },
-  {
-    img: 'Rectangle 15 (10).png',
-    title: 'Tomato basil',
-  },
-  {
-    img: 'Rectangle 15.png',
-    title: 'Sea star',
-  },
-  {
-    img: 'Rectangle 20.png',
-    title: 'Bike',
-  },
-];
 
 function a11yProps(index) {
   return {
@@ -97,7 +43,11 @@ export default function Profile() {
   const navigate = useNavigate();
 
   const [AllPosts, setAllPosts] = React.useState([]);
-  let Token = localStorage.getItem("token");
+  const [value, setValue] = React.useState(0);
+  const Admin = JSON.parse(localStorage.getItem("user"))
+  const Token = localStorage.getItem("token");
+
+
 
   function fetchAllPosts() {
     axios.get("http://16.170.173.197/posts", { headers: { Authorization: `Bearer ${Token}` } })
@@ -105,16 +55,14 @@ export default function Profile() {
       .catch((err) => console.log(err))
   }
 
-  const Admin = JSON.parse(localStorage.getItem("user"))
-  const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   React.useEffect(() => {
-    if (Admin == null)
-      navigate("/SignIn");
+    if (Token == null)
+      navigate("/Sign");
 
     fetchAllPosts()
   }, [])
@@ -126,13 +74,13 @@ export default function Profile() {
           component="img"
           sx={{ width: "20%", height: "10%", borderRadius: "50%", margin: "auto" }}
           image="MyPhoto.jpg"
-          alt="Live from space album cover"
+          alt="MyPhoto.jpg"
         />
 
         <Box sx={{ display: 'flex', flexDirection: "column", gap: "1rem", width: "100%" }}>
 
           <CardContent sx={{ display: "flex", justifyContent: "space-between", width: "100%", height: "fit-content", padding: "0", paddingY: "0px", mt: "1rem" }}>
-            <Typography component="div" variant="h5" sx={{ display: "flex", alignItems: "center", fontWeight: "900", fontSize: { xs: ".8rem", sm: "1.5rem", md: "1.2rem" } }}>Laeth </Typography>
+            <Typography component="div" variant="h5" sx={{ display: "flex", alignItems: "center", fontWeight: "900", fontSize: { xs: ".8rem", sm: "1.5rem", md: "1.2rem" } }}>{Admin.userName} </Typography>
 
             <Button variant="contained" sx={{ background: "white", fontSize: { xs: ".5rem", md: "1rem" }, p: ".3rem", borderRadius: "12px", "&:hover": { background: "white" } }}>Edit Profile</Button>
 

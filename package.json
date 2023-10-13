@@ -15,10 +15,13 @@
     "@mui/icons-material": "^5.14.12",
     "@mui/material": "^5.14.12",
     "@mui/styled-engine-sc": "^5.14.12",
+    "@splidejs/react-splide": "^0.7.12",
     "axios": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.11",
     "swiper": "^10.3.1"
   },

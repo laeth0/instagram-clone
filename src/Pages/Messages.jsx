@@ -31,14 +31,14 @@ export default function Messages() {
     }
     React.useEffect(() => {
         if (Admin == null)
-            navigate("/SignIn");
+            navigate("/Sign");
 
         fetchAllUsers()
     }, [])
 
     return (
-        <Grid container sx={{ height: "100%" }}>
-            <Grid item xs={12} sm={3} md={2} sx={{ display: { xs: openMessage ? "block" : "none", sm: "block" } }}>
+        <Grid container sx={{ height: "100vh" }}>
+            <Grid item xs={12} sm={3} md={2} sx={{ display: { xs: openMessage ? "block" : "none", sm: "block" } ,height:"100vh",overflowY:"scroll"}}>
                 <Box sx={{ display: { xs: "flex", sm: "none" }, alignItems: "center" }}>
                     <Button sx={{ color: 'white', textTransform: "none", width: "100%", paddingY: "1rem" }} onClick={() => setOpenMessage(!openMessage)}>
                         <KeyboardArrowLeftOutlinedIcon />
@@ -65,7 +65,7 @@ export default function Messages() {
 
                 <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem", marginY: "1rem" }}>
 
-                    {AllUsers.slice(0, 7).map(user =>
+                    {AllUsers.map(user =>
                         <Box key={user.id} onClick={() => { setOpenChat(true); setPersonChart(user) }} sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
 
                             <Box component="img" src='MyPhoto.jpg' alt='MyPhoto' sx={{ width: "25%", borderRadius: "50%", aspectRatio: "1/1" }} />
@@ -83,27 +83,27 @@ export default function Messages() {
 
             <Grid item xs={12} sm={9} md={10} sx={{ display: { xs: openMessage ? "none" : "block", sm: "block" } }}>
 
-                <Box sx={{ display: { xs: "flex", sm: "none" }, alignItems: "center" }}>
-                    <Button sx={{ color: 'white', textTransform: "none", paddingY: "1rem" }} onClick={() => setOpenMessage(!openMessage)}>
-                        <KeyboardArrowLeftOutlinedIcon />
-                        <Typography>Go To Friends</Typography>
-                    </Button>
-                </Box>
 
-                <Divider />
 
-                <Box sx={{ display: openChat == false ? "flex" : "none", flexDirection: "column", height: "100%", justifyContent: "center", alignItems: "center", gap: "1rem" }}>
+
+
+
+
+                <Box sx={{ display: openChat == false ? "flex" : "none", flexDirection: "column",height:"100%", justifyContent: "center", alignItems: "center", gap: "1rem", textAlign: "center" }}>
                     <Box component="img" src='messengar.png' alt='messengar.png' />
                     <Typography variant='h3'> Your messenger </Typography>
                     <Typography component="p" variant="h6"> Send private photos and messages to a friend or group </Typography>
-                    <Button variant="contained" >SEND MESSAGE</Button>
+                    <Button variant="contained" onClick={() => setOpenMessage(!openMessage)} >SEND MESSAGE</Button>
                 </Box>
 
-                <Box sx={{ display: openChat == true ? "flex" : "none", flexDirection: "column", width: "100%", height: "100%", mt: "1rem", justifyContent: "space-between" }}>
+                <Box sx={{ height: "100%", display: openChat == true ? "flex" : "none", flexDirection: "column", width: "100%", justifyContent: "space-between" }}>
 
-                    <Box sx={{ display: "flex" }}>
+                    <Box sx={{ display: "flex", mt: "1rem" }}>
                         <Box sx={{ display: "flex", alignItems: "center", flex: 1 }}>
-                            <Box component="img" src='MyPhoto.jpg' alt='MyPhoto' sx={{ width: "4rem", borderRadius: "50%", aspectRatio: "1/1", marginX: "1rem" }} />
+                            <KeyboardArrowLeftOutlinedIcon sx={{ display: { xs:"block",sm:"none"}}} onClick={() => setOpenMessage(!openMessage)} />
+
+                            <Box component="img" src='MyPhoto.jpg' alt='MyPhoto' sx={{ width: { xs: "3rem", md: "4rem" }, borderRadius: "50%", aspectRatio: "1/1", marginX: ".5rem" }} />
+
                             <Box>
                                 <Typography sx={{ fontSize: "1rem" }}>{personChart.userName}</Typography>
                                 <Typography sx={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: 'ellipsis', width: '100%', fontSize: ".7rem" }}>{personChart.email}</Typography>

@@ -1,11 +1,12 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import ImageListItem from '@mui/material/ImageListItem';
 import axios from 'axios';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Explore() {
+  const navigate = useNavigate();
 
   const [AllPosts, setAllPosts] = React.useState([]);
   let Token = localStorage.getItem("token");
@@ -21,6 +22,8 @@ export default function Explore() {
   }
 
   React.useEffect(() => {
+        if(Token==null)
+            navigate("/Sign")
     fetchAllPosts()
   }, [])
 

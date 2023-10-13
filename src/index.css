@@ -1,4 +1,26 @@
-.swiper-slide{
+.swiper-slide {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: max-content;
+    margin: 1rem;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #FFF;
+    border-radius: 10px;
+
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #929191;
+    border-radius: 10px;
+
 }

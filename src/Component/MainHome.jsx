@@ -60,12 +60,17 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function App() {
+    const navigate = useNavigate();
 
 
     const [open, setOpen] = React.useState(false);
     const Admin = JSON.parse(localStorage.getItem("user"))
 
 
+    React.useEffect(()=>{
+        if(Admin==null)
+            navigate("/Sign")
+    },[])
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -73,14 +78,14 @@ export default function App() {
 
                 <List sx={{ height: "100%", display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
                     <Box>
-                        <ResponsiveDrawerListItem Text="Home" Icon={<HomeIcon />} onClick={() => { }} open={open} />
-                        <ResponsiveDrawerListItem Text="Search" Icon={<SearchIcon />} onClick={() => { }} open={open} />
-                        <ResponsiveDrawerListItem Text="Explore" Icon={<ExploreOutlinedIcon />} onClick={() => { }} open={open} />
-                        <ResponsiveDrawerListItem Text="Reels" Icon={<MovieFilterIcon />} onClick={() => { }} open={open} />
-                        <ResponsiveDrawerListItem Text="Messages" Icon={<WhatsAppIcon />} onClick={() => { }} open={open} />
-                        <ResponsiveDrawerListItem Text="Notifications" Icon={<FavoriteBorderIcon />} onClick={() => { }} open={open} />
-                        <ResponsiveDrawerListItem Text="Create" Icon={<AddCircleOutlineIcon />} onClick={() => { }} open={open} />
-                        <ResponsiveDrawerListItem Text={Admin.userName} Icon={<Box component="img" src="Ellipse.png" sx={{width:"66%"}} alt='user image'/>} onClick={() => { }} open={open} />
+                        <ResponsiveDrawerListItem Text="Home" Icon={<HomeIcon />} onClick={() => navigate("/")} open={open} />
+                        <ResponsiveDrawerListItem Text="Search" Icon={<SearchIcon />} onClick={() => navigate("/Search")} open={open} />
+                        <ResponsiveDrawerListItem Text="Explore" Icon={<ExploreOutlinedIcon />} onClick={() => navigate("/Explore")} open={open} />
+                        <ResponsiveDrawerListItem Text="Reels" Icon={<MovieFilterIcon />} onClick={() => navigate("/Reels")} open={open} />
+                        <ResponsiveDrawerListItem Text="Messages" Icon={<WhatsAppIcon />} onClick={() => navigate("/Messages")} open={open} />
+                        <ResponsiveDrawerListItem Text="Notifications" Icon={<FavoriteBorderIcon />} onClick={() => navigate("/Notifications")} open={open} />
+                        <ResponsiveDrawerListItem Text="Create" Icon={<AddCircleOutlineIcon />} onClick={() => navigate("/Create")} open={open} />
+                        <ResponsiveDrawerListItem Text={Admin.userName} Icon={<Box component="img" src="MyPhoto.jpg" sx={{ aspectRatio: "1/1", borderRadius: "50%", width: "1.5rem" }} alt='user image' />} onClick={() => navigate(`/Profile/${Admin.userName}`)} open={open} />
                     </Box>
                     <Box>
                         <ResponsiveDrawerListItem Text="Menu" Icon={<IconButton sx={{ p: 0 }} color="inherit" aria-label="open drawer" ><MenuIcon /></IconButton>} onClick={() => setOpen(!open)} open={open} />

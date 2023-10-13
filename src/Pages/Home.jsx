@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import { Virtual } from 'swiper/modules';
+import "swiper/css"; 
+import 'swiper/css/virtual';
 import { Card, Grid, CardContent, CardActions, Box, CardHeader, Typography, CardMedia, IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -31,8 +33,8 @@ export default function Home() {
     }
 
     useEffect(() => {
-        if(Admin == null)
-            navigate("/SignIn");
+        if (Token == null)
+            navigate("/Sign");
 
         fetchAllUsers()
         fetchAllPosts()
@@ -42,29 +44,38 @@ export default function Home() {
         <>
             <Grid container >
 
-                <Grid item xs={11} md={7} >
-
+                <Grid item xs={12} md={7} >
                     <Swiper
-                        height={50}
-                        spaceBetween={5}
-                        slidesPerView={"auto"}
-                        grabCursor={true} centeredSlides={true} loop={true} >
-
-                        {AllUsers.slice(0, 12).map(user => (
-                            <SwiperSlide style={{ width: "15%" }} key={user.id}>
-                                <Box component="img" src="Ellipse.png" alt="alt for image" />
+                        slidesPerView={2}
+                        breakpoints={{
+                            300: {
+                                slidesPerView: 3,
+                            },
+                            600:{
+                                slidesPerView: 4,
+                            },
+                            768: {
+                                slidesPerView: 5,
+                            },
+                            1024: {
+                                slidesPerView: 7,
+                            },
+                        }}
+                     modules={[Virtual]}  virtual>
+                        {AllUsers.map((user,index) => (
+                            <SwiperSlide key={index} virtualIndex={index}>
+                                <Box sx={{ aspectRatio: "1/1", borderRadius: "50%",width:"4rem" }} component="img" src="MyPhoto.jpg" alt="alt for image"/>
                                 <Typography component="span" textAlign="center">{user.userName}</Typography>
                             </SwiperSlide>
                         ))}
-
-                    </Swiper>
+                    </Swiper> 
 
                     <Box sx={{ display: "flex", flexDirection: "column", gap: "2rem", mt: "2rem" }}>
 
                         {AllPosts.map(post => (
                             <Card sx={{ maxWidth: "100%" }} key={post.id}>
                                 <CardHeader
-                                    avatar={<Box src='Ellipse.png' component="img" alt='image' />}
+                                    avatar={<Box sx={{ aspectRatio: "1/1", borderRadius: "50%", width: "5rem" }} src='MyPhoto.jpg' component="img" alt='image' />}
                                     action={
                                         <IconButton aria-label="settings">
                                             <MoreVertIcon />
@@ -76,7 +87,7 @@ export default function Home() {
 
                                 <CardMedia
                                     component="img"
-                                    height="350"
+                                    height="300"
                                     image={post.image}
                                     alt="Paella dish"
                                     sx={{ objectFit: "cover" }}
@@ -107,7 +118,7 @@ export default function Home() {
                                 </CardActions>
 
 
-                                <CardContent sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                                <CardContent sx={{ display: "flex", flexDirection: "column", gap: ".5rem",py:".3rem" }}>
                                     <Typography component="span" variant="subtitle1">{post.likes.length} Likes</Typography>
                                     <Typography component="p" variant="subtitle1" color="text.secondary">{post.description}</Typography>
                                 </CardContent>
@@ -118,7 +129,7 @@ export default function Home() {
 
                 </Grid>
 
-                <Grid item xs={1} md={5} sx={{ display: { xs: "none", md: "flex" }, justifyContent: "start", alignItems: "center", flexDirection: "column" }}>
+                <Grid item xs={0} md={5} sx={{ display: { xs: "none", md: "flex" }, justifyContent: "start", alignItems: "center", flexDirection: "column" }}>
 
                     <Card sx={{ display: 'flex', background: "none", width: "65%", alignItems: "center" }}>
 
@@ -168,7 +179,7 @@ export default function Home() {
                                 </IconButton>
                             </Box>
 
-                        </Card> 
+                        </Card>
                     ))}
 
                 </Grid>
