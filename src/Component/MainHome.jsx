@@ -80,14 +80,14 @@ export default function MainHome({ theme, setTheme }) {
                 <TransitionsModal openTransitionsModal={openTransitionsModal} setOpenTransitionsModal={setOpenTransitionsModal} />
                 <List sx={{ height: "100%", display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
                     <Box>
-                        <ResponsiveDrawerListItem Text="Home" Icon={<HomeIcon />} onClick={() => navigate("/")} open={open} />
+                        <ResponsiveDrawerListItem Text="Home" Icon={<HomeIcon />} onClick={() => navigate("/Home")} open={open} />
                         <ResponsiveDrawerListItem Text="Search" Icon={<SearchIcon />} open={open} />
-                        <ResponsiveDrawerListItem Text="Explore" Icon={<ExploreOutlinedIcon />} onClick={() => navigate("/Explore")} open={open} />
+                        <ResponsiveDrawerListItem Text="Explore" Icon={<ExploreOutlinedIcon />} onClick={() => navigate("/Home/Explore")} open={open} />
                         <ResponsiveDrawerListItem Text="Reels" Icon={<MovieFilterIcon />} open={open} />
-                        <ResponsiveDrawerListItem Text="Messages" Icon={<WhatsAppIcon />} onClick={() => navigate("/Messages")} open={open} />
+                        <ResponsiveDrawerListItem Text="Messages" Icon={<WhatsAppIcon />} onClick={() => navigate("/Home/Messages")} open={open} />
                         <ResponsiveDrawerListItem Text="Notifications" Icon={<FavoriteBorderIcon />} open={open} />
                         <ResponsiveDrawerListItem Text="Create" Icon={<AddCircleOutlineIcon />} open={open} onClick={() => setOpenTransitionsModal(!openTransitionsModal)} />
-                        <ResponsiveDrawerListItem Text={Admin.userName} Icon={<Box component="img" src={Admin.avatar} sx={{ aspectRatio: "1/1", borderRadius: "50%", width: "1.5rem" }} alt='user image' />} onClick={() => navigate(`/Profile/${Admin.userName}`)} open={open} />
+                        <ResponsiveDrawerListItem Text={Admin.userName} Icon={<Box component="img" src={Admin.avatar} sx={{ aspectRatio: "1/1", borderRadius: "50%", width: "1.5rem" }} alt='user image' />} onClick={() => navigate(`/Home/Profile/${Admin.userName}`)} open={open} />
                     </Box>
                     <Box>
                         <ResponsiveDrawerListItem Text={theme} Icon={<IconButton sx={{ p: 0 }} color="inherit" aria-label="open drawer" >{theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}</IconButton>} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} open={open} />

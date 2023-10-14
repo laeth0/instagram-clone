@@ -32,7 +32,7 @@ export default function Messages({ theme }) {
     }
     React.useEffect(() => {
         if (Admin == null)
-            navigate("/Sign");
+            navigate("/");
 
         fetchAllUsers()
     }, [])

@@ -44,7 +44,7 @@ export default function Home() {
     useEffect(() => {
 
         if (localStorage.getItem("token") === null)
-            navigate("/Sign");
+            navigate("/");
 
         fetchAllUsers()
         fetchAllPosts()

@@ -62,7 +62,7 @@ export default function Profile() {
 
   React.useEffect(() => {
     if (Token == null)
-      navigate("/Sign");
+      navigate("/");
 
     fetchAllPosts()
   }, [])

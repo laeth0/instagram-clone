@@ -31,13 +31,13 @@ export default function App() {
       <CssBaseline />
       <BrowserRouter >
         <Routes>
-          <Route path='/' element={<MainHome setTheme={setTheme} theme={theme} />} >
+          <Route path='/Home' element={<MainHome setTheme={setTheme} theme={theme} />} >
             <Route index element={<Home />} />
-            <Route path='/Explore' element={<Explore />} />
-            <Route path='/Profile/:username' element={<Profile />} />
-            <Route path='/Messages' element={<Messages theme={theme}  />} />
+            <Route path='/Home/Explore' element={<Explore />} />
+            <Route path='/Home/Profile/:username' element={<Profile />} />
+            <Route path='/Home/Messages' element={<Messages theme={theme}  />} />
           </Route>
-          <Route path='/Sign' element={<Sign theme={theme} />} />
+          <Route  index element={<Sign theme={theme} />} />
           <Route path='/*' element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

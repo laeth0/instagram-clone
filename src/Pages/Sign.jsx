@@ -16,7 +16,7 @@ export default function Sign({ theme }) {
       .then(({ data }) => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/");
+        navigate("/Home");
       })
       .catch((err) => {
         console.log(err);
@@ -30,7 +30,7 @@ export default function Sign({ theme }) {
           .then(({ data }) => {
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
-            navigate("/");
+            navigate("/Home");
           })
           .catch((err) => {
             console.log(err);
@@ -43,7 +43,7 @@ export default function Sign({ theme }) {
 
   React.useEffect(() => {
     if (localStorage.getItem("token") !== null)
-      navigate("/");
+      navigate("/Home");
   }, [])
 
 

@@ -24,7 +24,7 @@ export default function Explore() {
 
   React.useEffect(() => {
     if (Token == null)
-      navigate("/Sign")
+      navigate("/")
     fetchAllPosts()
   }, [])
 
