@@ -1,4 +1,5 @@
 <h1>Instagram Clone</h1>
+<img src="https://github.com/laeth0/instagram-clone/assets/119698773/dd333d0a-9b7c-41d0-b0ea-7ba10b7b3fc4" />
 <h2>Description</h2>
 <p>This is an Instagram clone web application designed to replicate the core functionality and features of the popular social media platform, Instagram. It allows users to create accounts, upload and share photos, follow other users, like and comment on posts, and engage in a familiar social media experience.</p>
 <p>The application is built using modern web technologies, including HTML, CSS, JavaScript, ReactJS, MUI, and some libraries like swiper, and is powered by a backend server that manages user data, posts, and interactions. It also leverages a database to store user profiles, posts, and comments.</p>
